@@ -33,8 +33,6 @@ public class RentalDAO extends DAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			close();
 		}
 		return list;
 	}
@@ -48,8 +46,8 @@ public class RentalDAO extends DAO {
 			rs = psmt.executeQuery();
 			if (rs.next()) {
 				vo.setRentalDate(rs.getDate("rentaldate"));
-				vo.setbCode(rs.getString("bookcode"));
-				vo.setmId(rs.getString("memberid"));
+				vo.setbCode(rs.getString("bCode"));
+				vo.setmId(rs.getString("mId"));
 				vo.setReturnDate(rs.getString("returndate"));
 			}
 		} catch (SQLException e) {
@@ -81,27 +79,26 @@ public class RentalDAO extends DAO {
 		return n;
 	}
 
-	// 도서 대여
+	// 도서 반납
 	public int bookReturn(RentalVO vo) {
 		int n = 0;
-		String sql = "INSERT INTO RENTAL(BOOKCODE, MEMBERID) VALUES(?,?)";
+		String sql = "UPDATE RENTAL SET RETURNDATE=SYSDATE WHERE MEMBERID=?	AND BOOKCODE=?";
 
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, vo.getbCode());
-			psmt.setString(2, vo.getmId());
+			psmt.setString(1, vo.getmId());
+			psmt.setString(2, vo.getbCode());
 			n = psmt.executeUpdate();
 			if (n != 0) {
 				countPlus(Integer.parseInt(vo.getbCode()));
+				System.out.println("입력 완료");
 			}
-			System.out.println("입력 완료");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("입력 실패");
 		} finally {
 			close();
 		}
-
 		return n;
 	}
 

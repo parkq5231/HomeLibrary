@@ -41,8 +41,8 @@ td {
 			<h1>대여 가능 도서 목록</h1>
 		</div>
 		<div>
-			<form id="frm" name="frm " method="post">
-				<input type="hidden" id="bCode" name="bCode">
+			<form id="frm" name="frm" method="post">
+				<input type="hidden" id="bCode" name="bCode" value="${vo.bCode}">
 			</form>
 			<table border="1">
 				<tr>
@@ -59,10 +59,10 @@ td {
 						<td width="150">${vo.bName }</td>
 						<td width="100">${vo.bQty }</td>
 						<td width="100">${vo.bCount }</td>
-						<c:if test="${vo.bCount != 0  }">
+						<c:if test="${vo.bCount >0  }">
 							<th width="100" id="noticeYes">대출가능</th>
 						</c:if>
-						<c:if test="${vo.bCount == 0  }">
+						<c:if test="${vo.bCount <1  }">
 							<th width="100" id="noticeNo">대출불가능</th>
 						</c:if>
 					</tr>

@@ -20,18 +20,17 @@
 					<th width="100">대여일자</th>
 					<th width="100">도서코드</th>
 					<th width="100">회원아이디</th>
-					<th width="100">반납일자</th>
 				</tr>
 				<tr align="center">
 					<td width="100">${vo.rentalDate }</td>
 					<td width="100">${vo.bCode }</td>
 					<td width="100">${vo.mId }</td>
-					<td width="100">${vo.returnDate }</td>
 				</tr>
 			</table>
 			<p />
 			<div block="inline-block">
-				<button type="button" onclick="location.href='bookRental.do'">대여 목록</button>
+				<button type="button" onclick="location.href='bookRental.do'">대여
+					목록</button>
 				<button type="button" onclick="location.href='main.do'">HOME</button>
 			</div>
 

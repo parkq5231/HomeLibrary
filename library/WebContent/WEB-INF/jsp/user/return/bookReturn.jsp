@@ -11,14 +11,20 @@
 tr {
 	cursor: pointer
 }
+
+td {
+	text-align: center;
+}
 </style>
 
 <script>
-	function bookReturnSubmit(str) {
+	function returnAlert(str) {
 		var msg = confirm("해당 도서를 반납하시겠습니까?");
-		frm.bCode.value = str;
-		frm.action = "bookReturnUpdate.do";
-		frm.submit();
+		if (msg) {
+			frm.bCode.value = str;
+			frm.action = "bookReturnUpdate.do";
+			frm.submit();
+		}
 	}
 </script>
 </head>
@@ -32,7 +38,7 @@ tr {
 		</div>
 		<div>
 			<form id="frm" name="frm " method="post">
-				<input type="hidden" id="bCode" name="bCode">
+				<input type="hidden" id="bCode" name="bCode" value="${vo.bCode }">
 				<table border="1">
 
 					<tr>
@@ -44,7 +50,7 @@ tr {
 
 					<c:forEach var="vo" items="${list }">
 						<c:if test="${mId eq vo.mId}">
-							<tr align="center" onclick="bookReturnSubmit(${vo.bCode})">
+							<tr class="row" onclick="returnAlert('${vo.bCode}')">
 								<td width="100">${vo.mId }</td>
 								<td width="100">${vo.bCode }</td>
 								<td width="100">${vo.rentalDate }</td>
@@ -53,7 +59,6 @@ tr {
 						</c:if>
 					</c:forEach>
 				</table>
-
 				<p />
 				<button type="button" onclick="location.href='main.do'">HOME</button>
 

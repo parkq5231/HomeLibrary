@@ -25,7 +25,7 @@ public class BookRentalUpdate implements Command {
 		request.setAttribute("vo", vo);
 
 		int n = dao.bookInsert(vo);
-		String viewPage = null;
+		String viewPage = null;	
 
 		if (n != 0) {
 			viewPage = "user/rental/bookRentalUpdate";

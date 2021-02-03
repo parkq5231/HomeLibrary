@@ -1,7 +1,5 @@
 package co.micol.user.returnbook;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,12 +15,20 @@ public class BookReturnUpdate implements Command {
 		// 도서 반납 확인
 
 		RentalDAO dao = new RentalDAO();
-		ArrayList<RentalVO> list = new ArrayList<RentalVO>();
+		RentalVO vo = new RentalVO();
 
-		list = dao.RentalList();
-		request.setAttribute("list", list);
+		HttpSession session = request.getSession();
+		vo.setmId((String) session.getAttribute("mId"));
+		vo = dao.select(vo);
 
-		return "user/return/bookReturnUpdate";
+		vo.setbCode(request.getParameter("bCode"));
+
+		int n = dao.bookReturn(vo);
+
+		String viewPage = null;
+		if (n != 0) {
+			viewPage = "bookReturn.do";
+		}
+		return viewPage;
 	}
-
 }
