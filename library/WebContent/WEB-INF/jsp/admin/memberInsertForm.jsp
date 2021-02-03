@@ -20,6 +20,15 @@ td {
 		}
 
 	}
+	function idCheck() {
+		var url = "idCheck.do?id=" + frm.mId.value;
+		if (!frm.mId.value) {
+			alert("아이디를 입력하세요.");
+			frm.mId.focus();
+		} else {
+			window.open(url, "아이디중복체크", "width=400, height=350");
+		}
+	}
 </script>
 </head>
 <jsp:include page="../common/menu.jsp" />
@@ -32,26 +41,34 @@ td {
 			<div>
 				<table border="1">
 					<tr>
-						<th width="100">아이디</th>
-						<th width="100">이 름</th>
-						<th width="100">패스워드</th>
-						<th width="200">전화번호</th>
-						<th width="100">주 소</th>
-						<th width="100">권 한</th>
+						<th width="50">아이디</th>
+						<td width="50"><input type="text" id="mId" name="mId"
+							size="13" required="required"> <input type="button"
+							value="중복" onclick="return idCheck()"></td>
 					</tr>
 					<tr>
-						<td width="100"><input type="text" id="mId" name="mId"
-							required="required"></td>
-						<td width="100"><input type="text" id="mName" name="mName"
-							required="required"></td>
-						<td width="100"><input type="password" id="mPassword"
-							name="mPassword" required="required"></td>
+						<th width="50">이 름</th>
+						<td width="50"><input type="text" id="mName" name="mName"
+							size="20" required="required"></td>
+					</tr>
+					<tr>
+						<th width="50">패스워드</th>
+						<td width="50"><input type="password" id="mPassword"
+							size="20" name="mPassword" required="required"></td>
+					</tr>
+					<tr>
+						<th width="100">전화번호</th>
 						<td width="100"><input type="tel" id="mTel" name="mTel"
-							required="required"></td>
-						<td width="100"><input type="text" id="mAddress"
+							size="20" required="required"></td>
+					<tr>
+						<th width="50">주 소</th>
+						<td width="50"><input type="text" id="mAddress" size="20"
 							name="mAddress" required="required"></td>
-						<td width="100"><input type="text" id="mAuth" name="mAuth"
-							required="required"></td>
+					<tr>
+						<th width="50">권 한</th>
+						<td width="50"><input type="text" id="mAuth" name="mAuth"
+							size="20" required="required"></td>
+					</tr>
 				</table>
 				<br>
 			</div>

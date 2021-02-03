@@ -22,7 +22,7 @@ public class MemberInsert implements Command {
 		vo.setmAddress(request.getParameter("mAddress"));
 		vo.setmAuth(request.getParameter("mAuth"));
 
-		int n = dao.memberInsert(vo);
+		int n = dao.memberInsert2(vo);
 		String viewPage = null;
 
 		if (n != 0) {

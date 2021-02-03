@@ -81,31 +81,28 @@ public class RentalDAO extends DAO {
 		return n;
 	}
 
-	// 도서 반납
-	public RentalVO bookReturn(RentalVO vo) {
-
-		String sql = "UPDATE RENTAL SET(BOOKCODE, MEMBERID) VALUES(?,?)";
+	// 도서 대여
+	public int bookReturn(RentalVO vo) {
+		int n = 0;
+		String sql = "INSERT INTO RENTAL(BOOKCODE, MEMBERID) VALUES(?,?)";
 
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, vo.getbCode());
 			psmt.setString(2, vo.getmId());
-			rs = psmt.executeQuery();
-			if (rs.next()) {
-				vo.setRentalDate(rs.getDate("rentaldate"));
-				vo.setbCode(rs.getString("bookcode"));
-				vo.setmId(rs.getString("memberid"));
-				vo.setReturnDate(rs.getString("returndate"));
+			n = psmt.executeUpdate();
+			if (n != 0) {
 				countPlus(Integer.parseInt(vo.getbCode()));
 			}
-
+			System.out.println("입력 완료");
 		} catch (SQLException e) {
 			e.printStackTrace();
+			System.out.println("입력 실패");
 		} finally {
 			close();
 		}
 
-		return vo;
+		return n;
 	}
 
 	// 현재수량 더하기

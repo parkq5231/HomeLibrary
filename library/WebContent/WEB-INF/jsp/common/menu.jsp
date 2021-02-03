@@ -59,6 +59,17 @@ li.dropdown {
 .dropdown:hover .dropdown-content {
 	display: block;
 }
+
+/* 로그인 멤버 알림 글자 깜박임 */
+.blink {
+	animation: blinker 2s linear infinite;
+}
+
+@
+keyframes blinker { 50% {
+	opacity: 0;
+}
+}
 </style>
 </head>
 <body>
@@ -71,7 +82,7 @@ li.dropdown {
 			<li class="dropdown"><a href="javascript:void(0)"
 				class="dropbtn">마이 페이지</a>
 				<div class="dropdown-content">
-					<a href="#">도서 대여</a> <a href="#">도서 반납</a>
+					<a href="bookRental.do">도서 대여</a> <a href="bookReturn.do">도서 반납</a>
 				</div></li>
 		</c:if>
 		<c:if test="${not empty mId and mAuth =='ADMIN' }">
@@ -88,5 +99,13 @@ li.dropdown {
 			<li><a href="logout.do">Logout</a></li>
 		</c:if>
 	</ul>
+
+	<!-- 로그인 멤버 알림 -->
+	<c:if test="${not empty mId }">
+		<div align="right">
+			<h4 class="blink" style="padding-right: 20px">${mId }님 접속을 환영합니다.</h4>
+		</div>
+	</c:if>
+
 </body>
 </html>

@@ -10,7 +10,7 @@
 <body>
 	<jsp:include page="../common/menu.jsp" />
 	<div align="center">
-		<h1>환영합니다</h1>
+		<h1>메인 페이지</h1>
 
 	</div>
 </body>

@@ -29,6 +29,14 @@ import co.micol.library.admin.member.MemberView;
 import co.micol.library.login.Login;
 import co.micol.library.login.LoginForm;
 import co.micol.library.login.Logout;
+import co.micol.user.idCheck;
+import co.micol.user.join.MemberJoin;
+import co.micol.user.join.MemberJoinSuccess;
+import co.micol.user.join.joinSuccess;
+import co.micol.user.rentalbook.BookRental;
+import co.micol.user.rentalbook.BookRentalUpdate;
+import co.micol.user.returnbook.BookReturn;
+import co.micol.user.returnbook.BookReturnUpdate;
 
 @WebServlet("/FrontController")
 public class FrontController extends HttpServlet {
@@ -41,20 +49,32 @@ public class FrontController extends HttpServlet {
 
 	public void init(ServletConfig config) throws ServletException {
 		map.put("/main.do", new MainCommand()); // 메인 페이지
-
+		// 사용자
+		// 로그인
 		map.put("/loginForm.do", new LoginForm());// 로그인 페이지 호출
 		map.put("/login.do", new Login());// 로그인
 		map.put("/logout.do", new Logout());// 로그아웃
-
+		// 회원가입
+		map.put("/memberJoin.do", new MemberJoin()); // 회원가입
+		map.put("/idCheck.do", new idCheck()); // 아이디 중복체크
+		map.put("/memberJoinSuccess.do", new MemberJoinSuccess()); // 회원가입 확인
+		map.put("/joinSuccess.do", new joinSuccess()); // 회원가입 성공
+		// 대여
+		map.put("/bookRental.do", new BookRental()); // 도서 대여
+		map.put("/bookRentalUpdate.do", new BookRentalUpdate()); // 도서 대여 확인
+		// 반납
+		map.put("/bookReturn.do", new BookReturn()); // 도서 반납
+		map.put("/bookReturnUpdate.do", new BookReturnUpdate()); // 도서 반납 확인
 		// 관리자
-		map.put("/memberForm.do", new MemberForm());// 맴버관리
+		// 맴버관리
+		map.put("/memberForm.do", new MemberForm());// 맴버관리 페이지
 		map.put("/memberInsertForm.do", new MemberInsertForm());// 맴버관리-등록 폼
 		map.put("/memberInsert.do", new MemberInsert());// 맴버관리-등록
 		map.put("/memberView.do", new MemberView());// 맴버관리 상세페이지
 		map.put("/memberDelete.do", new MemberDelete());// 상세보기-삭제
 		map.put("/memberUpdateForm.do", new MemberUpdateForm());// 맴버관리-상세보기-수정 폼
 		map.put("/memberUpdate.do", new MemberUpdate());// 맴버관리-상세보기-수정
-
+		// 도서관리
 		map.put("/bookForm.do", new BookForm());// 도서관리 페이지
 		map.put("/bookInsertForm.do", new BookInsertForm());// 도서관리-등록 폼
 		map.put("/bookInsert.do", new BookInsert());// 도서관리-등록

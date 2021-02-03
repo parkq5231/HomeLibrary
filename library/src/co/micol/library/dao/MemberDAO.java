@@ -66,8 +66,34 @@ public class MemberDAO extends DAO {
 		return vo;
 	}
 
-	// 추가
+	// 유저가 추가
 	public int memberInsert(MemberVO vo) {
+		int n = 0;
+
+		String sql = "INSERT INTO MEMBER(MEMBERID, MEMBERNAME, MEMBERPASSWORD, MEMBERTEL, MEMBERADDRESS)"
+				+ "VALUES(?,?,?,?,?)";
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, vo.getmId());
+			psmt.setString(2, vo.getmName());
+			psmt.setString(3, vo.getmPassword());
+			psmt.setString(4, vo.getmTel());
+			psmt.setString(5, vo.getmAddress());
+
+			n = psmt.executeUpdate();
+
+			System.out.println(n + "건 멤버 등록.");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return n;
+	}
+
+	// 관리자로 추가
+	public int memberInsert2(MemberVO vo) {
 		int n = 0;
 
 		String sql = "INSERT INTO MEMBER VALUES(?,?,?,?,?,?)";
@@ -161,6 +187,27 @@ public class MemberDAO extends DAO {
 		}
 		return vo;
 
+	}
+
+	// 아이디 체크
+	public int isIdCheck(String id) {
+		int cnt = 0;
+		String sql = "SELECT MEMBERID FROM MEMBER WHERE MEMBERID = ?";
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				cnt = 1;// 아이디 있으면 1
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("아이디 중복확인 실패");
+		} finally {
+			close();
+		}
+		return cnt;
 	}
 
 	// 닫기
