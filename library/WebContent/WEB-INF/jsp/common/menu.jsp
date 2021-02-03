@@ -78,7 +78,7 @@ li.dropdown {
 			<li class="dropdown"><a href="javascript:void(0)"
 				class="dropbtn">관리자</a>
 				<div class="dropdown-content">
-					<a href="memberForm.do">맴버관리</a> <a href="#">도서관리</a>
+					<a href="memberForm.do">맴버관리</a> <a href="bookForm.do">도서관리</a>
 				</div></li>
 		</c:if>
 		<c:if test="${empty mId }">

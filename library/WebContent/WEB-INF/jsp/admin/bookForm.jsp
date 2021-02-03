@@ -12,11 +12,15 @@ td {
 }
 </style>
 <script type="text/javascript">
-	function memberView(str) {
-		document.frm.mId.value = str;
-		frm.action = "memberView.do";
+	function bookInsertAlert() {
+		frm.action = "bookInsertForm.do";
 		frm.submit();
 
+	}
+	function bookView(str) {
+		frm.bCode.value = str;
+		frm.action = "bookView.do";
+		frm.submit();
 	}
 </script>
 
@@ -25,19 +29,17 @@ td {
 <body>
 	<div align="center">
 		<div>
-			<h1>맴버관리</h1>
+			<h1>도서관리</h1>
 		</div>
 		<form id="frm" name="frm" method="post">
-			<input type="hidden" id="mId" name="mId">
+			<input type="hidden" id="bCode" name="bCode">
 			<div>
 				<table border="1">
 					<tr>
-						<th width="100">아이디</th>
-						<th width="100">이 름</th>
-						<th width="100">패스워드</th>
-						<th width="200">전화번호</th>
-						<th width="100">주소</th>
-						<th width="100">권한</th>
+						<th width="100">도서코드</th>
+						<th width="200">도서명</th>
+						<th width="100">기본수량</th>
+						<th width="100">현재수량</th>
 					</tr>
 					<c:if test="${empty list }">
 						<tr>
@@ -46,13 +48,11 @@ td {
 					</c:if>
 					<c:if test="${not empty list }">
 						<c:forEach var="vo" items="${list}">
-							<tr class="row" onclick="memberView('${vo.mId}')">
-								<td width="100">${vo.mId}</td>
-								<td width="100">${vo.mName}</td>
-								<td width="100">${vo.mPassword}</td>
-								<td width="100">${vo.mTel}</td>
-								<td width="100">${vo.mAddress}</td>
-								<td width="100">${vo.mAuth}</td>
+							<tr class="row" onclick="bookView('${vo.bCode}')">
+								<td width="100">${vo.bCode}</td>
+								<td width="100">${vo.bName}</td>
+								<td width="100">${vo.bQty}</td>
+								<td width="100">${vo.bCount}</td>
 							</tr>
 						</c:forEach>
 					</c:if>
@@ -61,7 +61,7 @@ td {
 			</div>
 		</form>
 		<div>
-			<button type="button" onclick="location.href='memberInsertForm.do'">등록</button>
+			<button type="button" onclick="bookInsertAlert()">등록</button>
 		</div>
 	</div>
 </body>

@@ -41,6 +41,26 @@ public class BookDAO extends DAO {
 		return list;
 	}
 
+	public BookVO select(BookVO vo) {
+		String sql = "SELECT * FROM BOOK WHERE BOOKCODE=?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, vo.getbCode());
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				vo.setbCode(rs.getString("bookcode"));
+				vo.setbName(rs.getString("bookname"));
+				vo.setbQty(rs.getInt("quantity"));
+				vo.setbCount(rs.getInt("bcount"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return vo;
+	}
+
 	// 추가
 	public int bookInsert(BookVO vo) {
 		int n = 0;
@@ -68,12 +88,13 @@ public class BookDAO extends DAO {
 	public int bookUpdate(BookVO vo) {
 		int n = 0;
 
-		String sql = "UPDATE BOOK SET QUANTITY = ? WHERE BOOKCODE = ?";
+		String sql = "UPDATE BOOK SET QUANTITY = ? , BCOUNT =? WHERE BOOKCODE = ? ";
 
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, vo.getbQty());
-			psmt.setString(2, vo.getbCode());
+			psmt.setInt(2, vo.getbCount());
+			psmt.setString(3, vo.getbCode());
 			n = psmt.executeUpdate();
 
 			System.out.println(n + "건 도서 수정.");

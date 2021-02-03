@@ -11,15 +11,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import co.micol.library.web.Login;
-import co.micol.library.web.LoginForm;
-import co.micol.library.web.Logout;
-import co.micol.library.web.MainCommand;
-import co.micol.library.web.MemberDelete;
-import co.micol.library.web.MemberForm;
-import co.micol.library.web.MemberUpdate;
-import co.micol.library.web.MemberUpdateForm;
-import co.micol.library.web.MemberView;
+import co.micol.library.admin.book.BookDelete;
+import co.micol.library.admin.book.BookForm;
+import co.micol.library.admin.book.BookInsert;
+import co.micol.library.admin.book.BookInsertForm;
+import co.micol.library.admin.book.BookUpdate;
+import co.micol.library.admin.book.BookUpdateForm;
+import co.micol.library.admin.book.BookView;
+import co.micol.library.admin.member.MainCommand;
+import co.micol.library.admin.member.MemberDelete;
+import co.micol.library.admin.member.MemberForm;
+import co.micol.library.admin.member.MemberInsert;
+import co.micol.library.admin.member.MemberInsertForm;
+import co.micol.library.admin.member.MemberUpdate;
+import co.micol.library.admin.member.MemberUpdateForm;
+import co.micol.library.admin.member.MemberView;
+import co.micol.library.login.Login;
+import co.micol.library.login.LoginForm;
+import co.micol.library.login.Logout;
 
 @WebServlet("/FrontController")
 public class FrontController extends HttpServlet {
@@ -37,11 +46,23 @@ public class FrontController extends HttpServlet {
 		map.put("/login.do", new Login());// 로그인
 		map.put("/logout.do", new Logout());// 로그아웃
 
+		// 관리자
 		map.put("/memberForm.do", new MemberForm());// 맴버관리
+		map.put("/memberInsertForm.do", new MemberInsertForm());// 맴버관리-등록 폼
+		map.put("/memberInsert.do", new MemberInsert());// 맴버관리-등록
 		map.put("/memberView.do", new MemberView());// 맴버관리 상세페이지
 		map.put("/memberDelete.do", new MemberDelete());// 상세보기-삭제
 		map.put("/memberUpdateForm.do", new MemberUpdateForm());// 맴버관리-상세보기-수정 폼
-		map.put("/memberUpdate.do", new MemberUpdate());//맴버관리-상세보기-수정
+		map.put("/memberUpdate.do", new MemberUpdate());// 맴버관리-상세보기-수정
+
+		map.put("/bookForm.do", new BookForm());// 도서관리 페이지
+		map.put("/bookInsertForm.do", new BookInsertForm());// 도서관리-등록 폼
+		map.put("/bookInsert.do", new BookInsert());// 도서관리-등록
+		map.put("/bookView.do", new BookView());// 도서관리 상세페이지
+		map.put("/bookDelete.do", new BookDelete());// 도서관리 상세페이지-삭제
+		map.put("/bookUpdateForm.do", new BookUpdateForm());// 도서관리 상세페이지-수정 폼
+		map.put("/bookUpdate.do", new BookUpdate());// 도서관리 상세페이지-수정
+
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)

@@ -70,7 +70,7 @@ public class MemberDAO extends DAO {
 	public int memberInsert(MemberVO vo) {
 		int n = 0;
 
-		String sql = "INSERT INTO MEMBER(MEMBERID, MEMBERNAME, MEMBERPASSWORD, MEMBERTEL, MEMBERADDRESS) VALUES(?,?,?,?,?)";
+		String sql = "INSERT INTO MEMBER VALUES(?,?,?,?,?,?)";
 
 		try {
 			psmt = conn.prepareStatement(sql);
@@ -79,6 +79,7 @@ public class MemberDAO extends DAO {
 			psmt.setString(3, vo.getmPassword());
 			psmt.setString(4, vo.getmTel());
 			psmt.setString(5, vo.getmAddress());
+			psmt.setString(6, vo.getmAuth());
 
 			n = psmt.executeUpdate();
 
